@@ -1,0 +1,190 @@
+ this.chart = new Chart("MyCharts", {
+    type: 'line',
+    data: {
+      labels: ['01 jan', '02 jan', '03 jan', '04 jan', '05 jan', '06 jan', '07 jan', '08 jan', '09 jan', '10 jan', '11 jan', '12 jan', '13 jan', '14 jan', '15 jan'],
+      datasets: [{
+              label: "Active Sales Person",
+              data: [0, 5, 10, 15, 20, 25, 30, 50],
+              backgroundColor: 'darkblue',
+              borderColor: 'darkblue',
+            },
+            {
+              label: "Inactive Sales Person",
+              data: [5, 20, 25, 10, 17, 15, 24, 14, 70],
+              backgroundColor: 'green',
+              borderColor: 'green',
+              
+             
+            }
+          ]
+      },
+      options: {
+
+        interaction:{
+        mode:"index"
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        aspectRatio: 1, // Set aspect ratio to 1 for a square chart
+        scales: {
+          x: {
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            grid: {
+              display: false,
+              color:"#D3D3D3"
+            
+            },
+            title: {
+              display: true,
+              text: 'Number of Sales Persons',
+              font: {
+                size: 14,
+                family: 'Arial',
+                weight: 'bold'
+              }
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              usePointStyle: true,
+            }
+          },
+          tooltip: {
+            usePointStyle:true,
+            displayColors: true,
+            backgroundColor: 'white',
+            titleColor:"black",
+            callbacks:{
+              labelTextColor:(context)=>{
+                return "black"
+              }
+            }
+            
+          }
+        }
+      }
+  });
+}
+
+
+createlineChart() {
+
+  
+  this.linechartOptions = {
+    series: [
+      {
+        name: "Active Sales Person",
+        data: [10, 5, 15, 17, 19, 12, 19, 25, 14]
+      },
+      {
+        name: "Inactive Sales Person",
+        data: [0,11, 15, 7, 19, 22, 23, 21, 18]
+      }
+    ],
+    
+    chart: {
+      height: 350,
+      type: "line",
+      zoom: {
+        enabled: false
+      },
+      toolbar: {
+        show: false // Remove the toolbar
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: "straight"
+    },
+    grid: {
+      row: {
+        colors: ["transparent"], 
+        opacity: 0.1 // Reduced opacity for y-axis
+      },
+      column: {
+        colors: ["transparent"], 
+        opacity: 0.9 // Increased opacity for x-axis
+      }
+    },
+    xaxis: {
+      categories: [
+        '01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan', '10 Jan', '11 Jan', '12 Jan', '13 Jan', '14 Jan', '15 Jan'
+      ],
+      tooltip: {
+        enabled: false // Disable tooltip on x-axis labels
+      },
+      labels: {
+        style: {
+          colors: '#979797'
+        }
+      }
+
+    },
+    yaxis: {
+      labels: {
+        style: {
+          colors: '#979797' // Grey color for y-axis labels
+        }
+      },
+      title: {
+        text: 'Number of Sales Persons',
+        style: {
+          color: '#979797',
+          fontSize: '12px',
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          fontWeight: 600,
+          cssClass: 'apexcharts-yaxis-title',
+        }
+
+        
+      },
+      
+    },
+    markers: {
+      size: 5,
+      
+     
+      hover: {
+        size: 5,
+        sizeOffset: 5
+      }
+    },
+    tooltip: {
+      enabled: true,
+      theme: "light",
+      x: {
+       show: true,
+           
+            // formatter: function (value,{ series, seriesIndex, dataPointIndex, w }) {
+            //    console.log("s"    , series)
+            //    console.log("i",seriesIndex)
+            //    console.log("d" ,dataPointIndex)
+            //    console.log("w" ,w)
+                   
+            //    console.log(w.config.xaxis.categories)
+            //    return `${w.config.xaxis.categories}`;
+                    
+            //     },
+                  
+                
+            },
+
+        
+      
+      
+      
+      },
+    }
+
+
+   
+  };

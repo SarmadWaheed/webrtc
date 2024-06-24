@@ -1,0 +1,103 @@
+ const totalSales = 18;
+    const data = [8, 4, 6];
+    const percentages = data.map(value => ((value / totalSales) * 100).toFixed(1) + '%');
+    const  doughnutLabel={
+      id:'doughnutLabel',
+      beforeDatasetsDraw(chart: any,args: any,pluginOptions: any) {
+         const {ctx,data} =chart;
+
+         ctx.save();
+
+         const xCoor=chart.getDatasetMeta(0).data[0].x;
+         const yCoor=chart.getDatasetMeta(0).data[0].y;
+
+         
+         ctx.textAlign="center";
+         ctx.textBaseline="middle";
+         ctx.font= " 15px arial";
+         ctx.fillStyle = "grey";
+         ctx.fillText('Total', xCoor, yCoor - 15);
+         
+         // Draw " Sales Person" in grey
+         ctx.font= " 15px arial";
+         ctx.fillStyle = "grey";
+         ctx.fillText(' Sales Person', xCoor, yCoor + 5);
+         
+         // Draw the total sales value in black
+         ctx.font= " Bold 15px arial";
+         ctx.fillStyle = "black";
+         ctx.fillText(`${totalSales}`, xCoor, yCoor + 25);
+
+
+
+      }
+    }
+ 
+
+    this.chart = new Chart("MyChart", {
+        type: 'doughnut',
+        data: {
+            labels: [
+              `Active sales person outside dealership:      ${percentages[0]}  ${data[0]}`,
+              `Inactive sales person  within dealership:    ${percentages[1]}  ${data[1]}`,
+              `Active sales person using within dealership: ${percentages[2]}  ${data[2]}`,
+            ],
+            datasets: [{
+                data: data,
+                hoverOffset: 3,
+                backgroundColor: ['green', 'darkblue', 'orange'],
+            }]
+        },
+        options: {
+            aspectRatio:1,
+            radius: '100%',
+            plugins:
+             {
+                legend: {
+                    position:'bottom',
+                    labels: {
+                        usePointStyle: true,
+                        font: {
+                            size: 10
+                        }
+                    }
+                },
+                tooltip: {
+                  displayColors: false,
+                  yAlign: 'bottom',
+                  backgroundColor: colorItems,
+
+                  callbacks:{
+                    label:(context)=>{
+                      console.log(context)
+                      console.log(context.label)
+                      console.log (context.parsed)
+                      return `: ${context.parsed}`
+                    }
+                  }
+
+                  
+                  
+              }
+
+            
+              
+            }
+
+            
+        },
+
+        plugins:[doughnutLabel]
+
+        
+    });
+
+   
+
+    
+
+    function colorItems(tooltipItem: { tooltip: { labelColors: { backgroundColor: any; }[]; }; }) {
+      console.log(tooltipItem.tooltip.labelColors[0].backgroundColor);
+        const tooltipbackgroundcolor = tooltipItem.tooltip.labelColors[0].backgroundColor;
+        return tooltipbackgroundcolor;
+    }
